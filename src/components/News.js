@@ -28,16 +28,17 @@ const News = (props) => {
         setLoading(false);
 
         props.setProgress(100);
-        setPage(page+1);
     };
 
     // work of componentDidMount one time run
     useEffect(() => {
+        document.title = `${props.category[0].toUpperCase()}${props.category.slice(1)} - NewsMonkey` ;
+
         updateNews();
-    },[]);
+    },[]); // eslint-disable-line
 
     const fetchMoreData = async () => {
-        let url = `https://newsapi.org/v2/top-headlines?category=${props.category}&country=${props.country}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`;
+        let url = `https://newsapi.org/v2/top-headlines?category=${props.category}&country=${props.country}&apiKey=${props.apiKey}&page=${page+1}&pageSize=${props.pageSize}`;
         
         let data = await fetch(url);
         let parsedData = await data.json();
@@ -49,7 +50,7 @@ const News = (props) => {
 
     return (
         <>
-            <h1 className="text-center my-3">{`Top Headlines On ${props.category[0].toUpperCase()}${props.category.slice(
+            <h1 style={{marginTop : "2.3em"}} className="text-center mb-3">{`Top Headlines On ${props.category[0].toUpperCase()}${props.category.slice(
                 1
             )}`}</h1>
             {loading && <Spinner />}
