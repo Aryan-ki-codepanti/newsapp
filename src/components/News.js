@@ -49,7 +49,7 @@ const News = (props) => {
 
     return (
         <>
-            <h1 className="text-center">{`Top Headlines On ${props.category[0].toUpperCase()}${props.category.slice(
+            <h1 className="text-center my-3">{`Top Headlines On ${props.category[0].toUpperCase()}${props.category.slice(
                 1
             )}`}</h1>
             {loading && <Spinner />}
